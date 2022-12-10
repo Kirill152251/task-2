@@ -21,4 +21,8 @@ class RandomListService {
     fun getAverageOfList(list: List<Int>): Double {
         return if (list.isNotEmpty()) list.sum().toDouble() / list.size else 0.0
     }
+
+    fun getSumOfList(list: List<Int>): Int {
+        return if (list.isNotEmpty()) list.sum() else 0
+    }
 }

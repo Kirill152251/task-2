@@ -30,4 +30,20 @@ internal class RandomListServiceTest {
 
         assertEquals(expected, actual)
     }
+    @Test
+    fun `sum of list is correct`() {
+        val list = listOf(15, 5, 16, 10)
+        val expected = 46
+        val actual = service.getSumOfList(list)
+
+        assertEquals(expected, actual)
+    }
+    @Test
+    fun `sum of empty list is 0`() {
+        val list = emptyList<Int>()
+        val expected = 0
+        val actual = service.getSumOfList(list)
+
+        assertEquals(expected, actual)
+    }
 }
