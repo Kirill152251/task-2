@@ -30,6 +30,7 @@ internal class RandomListServiceTest {
 
         assertEquals(expected, actual)
     }
+
     @Test
     fun `sum of list is correct`() {
         val list = listOf(15, 5, 16, 10)
@@ -38,6 +39,7 @@ internal class RandomListServiceTest {
 
         assertEquals(expected, actual)
     }
+
     @Test
     fun `sum of empty list is 0`() {
         val list = emptyList<Int>()
@@ -46,4 +48,14 @@ internal class RandomListServiceTest {
 
         assertEquals(expected, actual)
     }
+
+    @Test
+    fun `custom operation return correct answer`() {
+        val list = listOf(13,32,32,7)
+        val expected = (13 + 32) / (- 32 - 7)
+        val actual = service.getCustomOperationResult(list)
+
+        assertEquals(expected, actual)
+    }
+
 }

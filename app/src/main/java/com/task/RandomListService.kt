@@ -25,4 +25,13 @@ class RandomListService {
     fun getSumOfList(list: List<Int>): Int {
         return if (list.isNotEmpty()) list.sum() else 0
     }
+
+    fun getCustomOperationResult(list: List<Int>): Int {
+        val firstPart = list.take(list.size / 2)
+        val secondPart = mutableListOf<Int>()
+        list.forEachIndexed { index, item ->
+            if (index >= list.size / 2) secondPart.add(-item)
+        }
+        return firstPart.sum() / secondPart.sum()
+    }
 }
