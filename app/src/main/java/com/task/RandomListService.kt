@@ -4,13 +4,21 @@ import kotlin.random.Random
 
 class RandomListService {
 
-    fun getRandomList(): List<Double> {
+    fun getRandomList(): List<Int> {
         val randomSize = Random.nextInt(2, 100)
-        val randomEvenSize = if (randomSize % 2 == 1) randomSize - 1 else randomSize
-        return List(randomEvenSize) { Random.nextDouble(0.0, 100.0) }
+
+        val randomSet = mutableSetOf<Int>()
+        for (i in 0 until randomSize) {
+            randomSet.add(Random.nextInt(0, 1000))
+        }
+        if (randomSet.size % 2 != 0) {
+            randomSet.remove(randomSet.last())
+        }
+        if (randomSet.size == 1) randomSet.add(randomSet.first() + Random.nextInt(1, 100))
+        return randomSet.toList()
     }
 
-    fun getAverageOfList(list: List<Double>): Double {
-        return if (list.isNotEmpty()) list.sum() / list.size else 0.0
+    fun getAverageOfList(list: List<Int>): Double {
+        return if (list.isNotEmpty()) list.sum().toDouble() / list.size else 0.0
     }
 }

@@ -15,8 +15,8 @@ internal class RandomListServiceTest {
 
     @Test
     fun `average of list is correct`() {
-        val list = listOf<Double>(15.0, 5.0, 10.0, 10.0)
-        val expected = 10.0
+        val list = listOf(15, 5, 16, 10)
+        val expected = 11.5
         val actual = service.getAverageOfList(list)
 
         assertEquals(expected, actual)
@@ -24,7 +24,7 @@ internal class RandomListServiceTest {
 
     @Test
     fun `average of empty list is 0`() {
-        val list = emptyList<Double>()
+        val list = emptyList<Int>()
         val expected = 0.0
         val actual = service.getAverageOfList(list)
 
