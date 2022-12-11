@@ -52,7 +52,7 @@ internal class RandomListServiceTest {
     @Test
     fun `custom operation return correct answer`() {
         val list = listOf(13,32,32,7)
-        val expected = (13 + 32) / (- 32 - 7)
+        val expected = (13 + 32).toDouble() / (- 32 - 7)
         val actual = service.getCustomOperationResult(list)
 
         assertEquals(expected, actual)
