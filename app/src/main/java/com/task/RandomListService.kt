@@ -17,27 +17,10 @@ class RandomListService {
         if (randomSet.size == 1) randomSet.add(randomSet.first() + Random.nextInt(1, 100))
         return randomSet.toList()
     }
-
-    fun getAverageOfList(list: List<Int>): Double {
-        return if (list.isNotEmpty()) list.sum().toDouble() / list.size else 0.0
-    }
-
-    fun getSumOfList(list: List<Int>): Int {
-        return if (list.isNotEmpty()) list.sum() else 0
-    }
-
-    fun getCustomOperationResult(list: List<Int>): Double {
-        val firstPart = list.take(list.size / 2)
-        val secondPart = mutableListOf<Int>()
-        list.forEachIndexed { index, item ->
-            if (index >= list.size / 2) secondPart.add(-item)
-        }
-        return firstPart.sum().toDouble() / secondPart.sum()
-    }
 }
 
 data class OperationsResult(
-    val sum: Int,
+    val sum: Double,
     val average: Double,
     val customOperation: Double
 )

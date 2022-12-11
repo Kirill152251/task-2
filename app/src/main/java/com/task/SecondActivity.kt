@@ -6,10 +6,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContract
 import com.google.android.material.button.MaterialButton
+import com.task.operations.AverageOperation
+import com.task.operations.CustomOperation
+import com.task.operations.SumOperation
 
 class SecondActivity : AppCompatActivity() {
-
-    private val randomListService = RandomListService()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,9 +21,9 @@ class SecondActivity : AppCompatActivity() {
 
 
         val outputIntent = Intent().apply {
-            putExtra(EXTRA_SUM, randomListService.getSumOfList(randomList))
-            putExtra(EXTRA_AVERAGE, randomListService.getAverageOfList(randomList))
-            putExtra(EXTRA_CUSTOM_OPERATION, randomListService.getCustomOperationResult(randomList))
+            putExtra(EXTRA_SUM, SumOperation().doOperation(randomList))
+            putExtra(EXTRA_AVERAGE, AverageOperation().doOperation(randomList))
+            putExtra(EXTRA_CUSTOM_OPERATION, CustomOperation().doOperation(randomList))
         }
 
         button.setOnClickListener {
@@ -40,8 +41,8 @@ class SecondActivity : AppCompatActivity() {
         }
 
         override fun parseResult(resultCode: Int, intent: Intent?): OperationsResult {
-            intent ?: return OperationsResult(0, 0.0, 0.0)
-            val sum = intent.getIntExtra(EXTRA_SUM, 0)
+            intent ?: return OperationsResult(0.0, 0.0, 0.0)
+            val sum = intent.getDoubleExtra(EXTRA_SUM, 0.0)
             val average = intent.getDoubleExtra(EXTRA_AVERAGE, 0.0)
             val customOperation = intent.getDoubleExtra(EXTRA_CUSTOM_OPERATION, 0.0)
             return OperationsResult(sum, average, customOperation)
