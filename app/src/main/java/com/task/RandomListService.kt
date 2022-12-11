@@ -1,8 +1,17 @@
 package com.task
 
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlin.random.Random
 
-class RandomListService {
+object RandomListService {
+
+    private val randomListPrivate = MutableStateFlow<List<Int>>(emptyList())
+    val randomList = randomListPrivate.asStateFlow()
+
+    fun setList(list: List<Int>) {
+        randomListPrivate.value = list
+    }
 
     fun getRandomList(): List<Int> {
         val randomSize = Random.nextInt(2, 100)

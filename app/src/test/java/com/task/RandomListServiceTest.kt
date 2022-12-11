@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test
 
 internal class RandomListServiceTest {
 
-    private val service = RandomListService()
+    private val service = RandomListService
 
     @Test
     fun `list size is even`() {
