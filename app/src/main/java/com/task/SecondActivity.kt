@@ -12,21 +12,26 @@ import com.task.operations.SumOperation
 
 class SecondActivity : AppCompatActivity() {
 
+    private val randomListService = RandomListService
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_second)
-        val button = findViewById<MaterialButton>(R.id.go_back_to_main_activity_btn)
+        val backToMainActivityButton = findViewById<MaterialButton>(R.id.go_back_to_main_activity_btn)
 
         val randomList = intent.getIntArrayExtra(EXTRA_RANDOM_LIST)!!.toList()
 
 
         val outputIntent = Intent().apply {
-            putExtra(EXTRA_SUM, SumOperation().doOperation(randomList))
-            putExtra(EXTRA_AVERAGE, AverageOperation().doOperation(randomList))
-            putExtra(EXTRA_CUSTOM_OPERATION, CustomOperation().doOperation(randomList))
+            randomListService.setOperationStrategy(SumOperation())
+            putExtra(EXTRA_SUM, randomListService.executeOperationStrategy(randomList))
+            randomListService.setOperationStrategy(AverageOperation())
+            putExtra(EXTRA_AVERAGE, randomListService.executeOperationStrategy(randomList))
+            randomListService.setOperationStrategy(CustomOperation())
+            putExtra(EXTRA_CUSTOM_OPERATION, randomListService.executeOperationStrategy(randomList))
         }
 
-        button.setOnClickListener {
+        backToMainActivityButton.setOnClickListener {
             setResult(RESULT_OK, outputIntent)
             finish()
         }

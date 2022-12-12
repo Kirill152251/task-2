@@ -1,5 +1,6 @@
 package com.task
 
+import com.task.operations.SumOperation
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlin.random.Random
@@ -8,6 +9,16 @@ object RandomListService {
 
     private val randomListPrivate = MutableStateFlow<List<Int>>(emptyList())
     val randomList = randomListPrivate.asStateFlow()
+
+    private var strategy: OperationStrategy = SumOperation()
+
+    fun setOperationStrategy(newStrategy: OperationStrategy) {
+        strategy = newStrategy
+    }
+
+    fun executeOperationStrategy(list: List<Int>): Double {
+        return strategy.doOperation(list)
+    }
 
     fun setList(list: List<Int>) {
         randomListPrivate.value = list
